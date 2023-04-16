@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/onboardindViewPagerFragment"
         android:label="fragment_onboarding_viewpager"
-        android:name="com.kfd.jobana.OnboardingViewPagerFragment"
+        android:name="com.kfd.jobana.onboarding.OnboardingViewPagerFragment"
         tools:layout="@layout/fragment_onboarding_view_pager"
         >
         <action
