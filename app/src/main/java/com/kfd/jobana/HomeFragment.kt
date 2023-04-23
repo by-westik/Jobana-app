@@ -17,10 +17,10 @@ class HomeFragment : Fragment() {
 
         if (onBoardingFinished()) {
             Toast.makeText(context, "The screens have already been viewed", Toast.LENGTH_SHORT).show()
-           // findNavController().navigate(R.id.action_homeFragment_to_onboardingViewPagerFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_viewPagerFragment)
         } else {
             Toast.makeText(context, "First viewing of screens", Toast.LENGTH_SHORT).show()
-          //  findNavController().navigate(R.id.action_homeFragment_to_onboardingViewPagerFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_viewPagerFragment)
         }
 
         return inflater.inflate(R.layout.fragment_home, container, false)
