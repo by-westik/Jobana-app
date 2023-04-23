@@ -10,6 +10,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(R.layout.activity_main)
 
-        // test commit
+        // test commit 2
     }
 }
