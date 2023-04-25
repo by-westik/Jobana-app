@@ -13,7 +13,7 @@
         android:text="Пропустить"
         android:textSize="18sp"
         android:layout_alignParentEnd="true"
-        android:layout_margin="30dp" />
+        android:layout_margin="30dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
@@ -25,9 +25,19 @@
     <RelativeLayout
         android:id="@+id/bootom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Назад"
+            android:textSize="18sp"
+            android:layout_margin="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/page_indicator"
@@ -35,10 +45,9 @@
             android:layout_height="wrap_content"
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp"
-            android:layout_margin="30dp"
+            android:layout_marginBottom="80dp"
             app:tabBackground="@drawable/onboarding_view_pager_selector"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerHorizontal="true"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_next"
@@ -46,7 +55,8 @@
             android:layout_height="wrap_content"
             android:text="Далее"
             android:textSize="18sp"
-            android:layout_margin="10dp"
+            android:layout_margin="30dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>

@@ -26,7 +26,7 @@ class OnBoardingViewPagerAdapter(
 
     private fun createFragmentList(): ArrayList<Fragment> {
         val list = ArrayList<Fragment>  ()
-        list.add(OnBoardingFragment.newInstance("First Title", "First Description", R.drawable.ic_baseline_chat_24))
+        list.add(OnBoardingFragment.newInstance("First Title", "First Description", R.drawable.on_boarding_image_1))
         list.add(OnBoardingFragment.newInstance("Second title", "Second Description", R.drawable.ic_baseline_add_to_home_screen_24))
         list.add(OnBoardingFragment.newInstance("Third title", "Third description", R.drawable.ic_baseline_monetization_on_24))
 
