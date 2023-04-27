@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp"
-            android:layout_marginBottom="80dp"
             app:tabBackground="@drawable/onboarding_view_pager_selector"
             android:layout_centerHorizontal="true"/>
 
