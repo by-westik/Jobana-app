@@ -1,6 +1,7 @@
 package com.kfd.jobana.onboarding
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ class ViewPagerFragment : Fragment() {
     private lateinit var viewPager2: ViewPager2
     private lateinit var tvSkip: AppCompatTextView
     private lateinit var tvNext: AppCompatTextView
+    private lateinit var tvPrevious: AppCompatTextView
 
     private var _binding: FragmentViewPagerBinding? = null
     private val binding get() = _binding!!
@@ -36,13 +38,34 @@ class ViewPagerFragment : Fragment() {
         viewPager2.adapter = OnBoardingViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.pageIndicator, viewPager2) { _, _ -> }.attach()
 
-
+        tvPrevious = binding.tvPrevious
         tvNext = binding.tvNext
-        Log.d("vpfargment", "before onclicklistener")
+
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (position == 0) {
+                    tvPrevious.visibility = View.GONE
+                } else {
+                    tvPrevious.visibility = View.VISIBLE
+                }
+                if (position == 2) {
+                    tvNext.text = "Завершить"
+                } else {
+                    tvNext.text = "Далее"
+                }
+                super.onPageSelected(position)
+            }
+        })
+
+        tvPrevious.setOnClickListener {
+            if (getItem() > 0) {
+                viewPager2.setCurrentItem(getItem() - 1, true)
+            }
+        }
+
         tvNext.setOnClickListener {
             if (getItem() > viewPager2.childCount) {
                 findNavController().navigate(R.id.action_viewPagerFragment_to_finishFragment)
-                onBoardingFinished()
             } else {
                 viewPager2.setCurrentItem(getItem() + 1, true)
             }
@@ -50,8 +73,7 @@ class ViewPagerFragment : Fragment() {
 
         tvSkip = binding.tvSkip
         tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_homeFragment)
-            onBoardingFinished()
+            findNavController().navigate(R.id.action_viewPagerFragment_to_finishFragment)
         }
 
         return view

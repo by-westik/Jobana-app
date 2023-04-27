@@ -16,7 +16,6 @@ class OnBoardingViewPagerAdapter(
     private val fragmentList: ArrayList<Fragment> = createFragmentList()
 
     override fun createFragment(position: Int): Fragment {
-        Log.d("adapter", "create Fragment")
         return fragmentList[position]
     }
 
@@ -29,7 +28,6 @@ class OnBoardingViewPagerAdapter(
         list.add(OnBoardingFragment.newInstance("Создавайте объявления", "Создавайте, размещайте и редактируйте объявления не выходя из приложения", R.drawable.on_boarding_image_1))
         list.add(OnBoardingFragment.newInstance("Общайтесь в чате", "Обсуждайте детали заказа и исполнения с закачиками и специалистами", R.drawable.on_boarding_image_2))
         list.add(OnBoardingFragment.newInstance("Единый профиль", "Попробуйте себя в обоих ролях без дополнительной регистрации", R.drawable.on_boarding_image_3))
-
         return list
     }
 }
