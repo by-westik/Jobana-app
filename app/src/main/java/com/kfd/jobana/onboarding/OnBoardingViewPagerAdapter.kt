@@ -28,7 +28,7 @@ class OnBoardingViewPagerAdapter(
         val list = ArrayList<Fragment>  ()
         list.add(OnBoardingFragment.newInstance("Создавайте объявления", "Создавайте, размещайте и редактируйте объявления не выходя из приложения", R.drawable.on_boarding_image_1))
         list.add(OnBoardingFragment.newInstance("Общайтесь в чате", "Обсуждайте детали заказа и исполнения с закачиками и специалистами", R.drawable.on_boarding_image_2))
-        list.add(OnBoardingFragment.newInstance("Third title", "Third description", R.drawable.ic_baseline_monetization_on_24))
+        list.add(OnBoardingFragment.newInstance("Единый профиль", "Попробуйте себя в обоих ролях без дополнительной регистрации", R.drawable.on_boarding_image_3))
 
         return list
     }
