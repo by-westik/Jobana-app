@@ -88,11 +88,4 @@ class ViewPagerFragment : Fragment() {
         _binding = null
     }
 
-    private fun onBoardingFinished() {
-        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putBoolean("Finished", true)
-        editor.apply()
-    }
-
 }
