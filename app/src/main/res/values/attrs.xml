@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="inputTextIcon" format="reference|color"/>
+    <attr name="inputTextStroke" format="reference|color"/>
+    <attr name="primaryTextColor" format="reference|color"/>
+</resources>

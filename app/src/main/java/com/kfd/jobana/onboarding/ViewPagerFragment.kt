@@ -73,7 +73,7 @@ class ViewPagerFragment : Fragment() {
 
         tvSkip = binding.tvSkip
         tvSkip.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_finishFragment)
+            findNavController().navigate(R.id.action_viewPagerFragment_to_loginFragment)
         }
 
         return view

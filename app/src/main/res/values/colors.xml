@@ -12,4 +12,8 @@
     <color name="calm_waters">#E9F8F9</color>
     <color name="icy_breeze">#C0EEF2</color>
     <color name="poppy_surprize">#FF5733</color>
+
+    <color name="spanish_grey">#979797</color>
+    <color name="snowflake">#F0F0F0</color>
+    <color name="chimney_sweep">#263238</color>
 </resources>

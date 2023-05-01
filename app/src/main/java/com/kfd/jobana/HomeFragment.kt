@@ -17,7 +17,7 @@ class HomeFragment : Fragment() {
 
         if (onBoardingFinished()) {
             Toast.makeText(context, "The screens have already been viewed", Toast.LENGTH_SHORT).show()
-        //    findNavController().navigate(R.id.action_homeFragment_to_viewPagerFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         } else {
             Toast.makeText(context, "First viewing of screens", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_homeFragment_to_viewPagerFragment)

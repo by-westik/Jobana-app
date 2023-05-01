@@ -31,7 +31,7 @@ class FinishFragment : Fragment() {
         btnFinish = binding.btnFinish
         btnFinish.setOnClickListener {
             onBoardingFinished()
-            findNavController().navigate(R.id.action_finishFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_finishFragment_to_loginFragment)
         }
         return view
     }
