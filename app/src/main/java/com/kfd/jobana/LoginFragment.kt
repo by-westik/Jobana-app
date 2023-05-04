@@ -10,10 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.kfd.jobana.databinding.FragmentLoginBinding
 import com.kfd.jobana.databinding.FragmentSignUpBinding
+import com.kfd.jobana.network.AuthApi
+import com.kfd.jobana.network.LoginRequest
+import com.kfd.jobana.network.RemoteDataSource
+import com.kfd.jobana.network.Resource
+import com.kfd.jobana.repository.AuthRepository
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -27,30 +35,12 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    private val remoteDataSource = RemoteDataSource()
+    private val authRepository =  AuthRepository(remoteDataSource.buildApi(AuthApi::class.java))
+    private lateinit var authViewModel: AuthViewModel
+
     private lateinit var btnLogin: MaterialButton
-    val URL = "http://192.168.0.102:8000/api/health"
-    var okHttpClient: OkHttpClient = OkHttpClient()
 
-    private fun loadHealth() {
-        val request: Request = Request.Builder().url(URL).build()
-        okHttpClient.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                e.printStackTrace()
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
-                    val json = response.body?.string()
-                    val txt = (json?.let { JSONObject(it).get("message") }).toString()
-
-                    Log.d(TAG, txt)
-
-                }
-            }
-        })
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,10 +49,24 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        val factory = ViewModelFactory(authRepository)
+        authViewModel = ViewModelProvider(this, factory).get(AuthViewModel::class.java )
+        authViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(), "Login Failure", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         btnLogin = binding.btnLogin
         btnLogin.setOnClickListener {
-            //findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
-            loadHealth()
+            val email = binding.emailText.text.toString()
+            val password = binding.passwordText.text.toString()
+            authViewModel.login(LoginRequest(email, password))
         }
 
         return view
