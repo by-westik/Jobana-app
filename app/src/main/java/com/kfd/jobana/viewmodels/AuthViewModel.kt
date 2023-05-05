@@ -1,0 +1,35 @@
+package com.kfd.jobana.viewmodels
+
+import android.content.ContentValues.TAG
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.kfd.jobana.models.LoginRequest
+import com.kfd.jobana.models.LoginResponse
+import com.kfd.jobana.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class AuthViewModel @Inject constructor(
+    private val repository: AuthRepository
+) : ViewModel() {
+
+    private val _loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
+    val loginResponse: LiveData<LoginResponse>
+        get() = _loginResponse
+
+     fun loginUser(loginRequest: LoginRequest) = viewModelScope.launch {
+        repository.loginUser(loginRequest).let { response ->
+             if (response.isSuccessful) {
+                 _loginResponse.postValue(response.body())
+             } else {
+                 Log.d(TAG, "ERROR response code: ${response.code()}")
+             }
+        }
+    }
+
+}

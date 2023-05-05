@@ -1,4 +1,4 @@
-package com.kfd.jobana.network.responses
+package com.kfd.jobana.models
 
 data class LoginResponse (
     val token: String,

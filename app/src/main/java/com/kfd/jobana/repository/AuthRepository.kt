@@ -1,19 +1,13 @@
 package com.kfd.jobana.repository
 
-import com.kfd.jobana.network.AuthApi
-import com.kfd.jobana.network.LoginRequest
+import com.kfd.jobana.network.AuthApiService
+import com.kfd.jobana.models.LoginRequest
+import javax.inject.Inject
 
-class AuthRepository(
-    private val api: AuthApi
-) : BaseRepository() {
+class AuthRepository @Inject constructor(private val apiService: AuthApiService) {
 
-    suspend fun loginUser(
-        email: String,
-        password: String
-    ) = safeApiCall { api.loginUser(email, password) }
-
-    suspend fun login (
+    suspend fun loginUser (
         loginRequest: LoginRequest
-    ) = safeApiCall { api.login(loginRequest) }
+    )  = apiService.loginUser(loginRequest)
 
 }

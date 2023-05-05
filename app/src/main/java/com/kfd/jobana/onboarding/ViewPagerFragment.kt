@@ -1,15 +1,11 @@
 package com.kfd.jobana.onboarding
 
-import android.content.Context
-import android.opengl.Visibility
-import android.os.Build
+
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2

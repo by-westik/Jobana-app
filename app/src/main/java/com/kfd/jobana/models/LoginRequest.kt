@@ -1,4 +1,4 @@
-package com.kfd.jobana.network
+package com.kfd.jobana.models
 
 data class LoginRequest (
     val email: String,

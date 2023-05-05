@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
-import com.kfd.jobana.databinding.FragmentFinishBinding
 import com.kfd.jobana.databinding.FragmentSignUpBinding
 
 

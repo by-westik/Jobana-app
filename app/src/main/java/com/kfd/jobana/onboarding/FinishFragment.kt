@@ -10,7 +10,6 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.kfd.jobana.R
 import com.kfd.jobana.databinding.FragmentFinishBinding
-import com.kfd.jobana.databinding.FragmentViewPagerBinding
 
 
 class FinishFragment : Fragment() {
