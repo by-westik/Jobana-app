@@ -8,12 +8,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
+import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentLoginBinding
 import com.kfd.jobana.models.LoginRequest
+import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -23,6 +28,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
 
+    private lateinit var userPreferences: UserPreferences
     private lateinit var btnLogin: MaterialButton
     private lateinit var tvSignUp: AppCompatTextView
 
@@ -31,15 +37,26 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        userPreferences = UserPreferences(requireContext())
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        authViewModel.loginResponse.observe(viewLifecycleOwner) {
+        authViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
+            when (it){
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        userPreferences.saveUserAuthToken(it.value.token)
+                    }
+                }
+                else -> {
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                }
+            }
             // TODO сделать переход на личный кабинет и проверку на ответ сервера
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
 
 
-        }
+
+        })
 
         btnLogin = binding.btnLogin
         btnLogin.setOnClickListener {

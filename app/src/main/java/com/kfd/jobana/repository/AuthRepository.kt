@@ -5,14 +5,19 @@ import com.kfd.jobana.models.LoginRequest
 import com.kfd.jobana.models.RegisterRequest
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val apiService: AuthApiService) {
+class AuthRepository @Inject constructor(private val apiService: AuthApiService) :
+    BaseRepository() {
 
     suspend fun loginUser (
         loginRequest: LoginRequest
-    )  = apiService.loginUser(loginRequest)
+    )  = safeApiCall {
+        apiService.loginUser(loginRequest)
+    }
 
     suspend fun registerUser (
         registerRequest: RegisterRequest
-    ) = apiService.registerUser(registerRequest)
+    ) = safeApiCall {
+        apiService.registerUser(registerRequest)
+    }
 
 }
