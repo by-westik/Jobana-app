@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kfd.jobana.models.LoginRequest
 import com.kfd.jobana.models.LoginResponse
+import com.kfd.jobana.models.RegisterRequest
 import com.kfd.jobana.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +23,8 @@ class AuthViewModel @Inject constructor(
     val loginResponse: LiveData<LoginResponse>
         get() = _loginResponse
 
-     fun loginUser(loginRequest: LoginRequest) = viewModelScope.launch {
+    //TODO сделать обработку ошибок сервера
+    fun loginUser(loginRequest: LoginRequest) = viewModelScope.launch {
         repository.loginUser(loginRequest).let { response ->
              if (response.isSuccessful) {
                  _loginResponse.postValue(response.body())
@@ -31,5 +33,16 @@ class AuthViewModel @Inject constructor(
              }
         }
     }
+
+    fun registerUser(registerRequest: RegisterRequest) = viewModelScope.launch {
+        repository.registerUser(registerRequest).let {response ->
+            if (response.isSuccessful) {
+                _loginResponse.postValue(response.body())
+            } else {
+                Log.d(TAG, "ERROR response code: ${response.code()}")
+            }
+        }
+    }
+
 
 }

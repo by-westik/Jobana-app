@@ -17,6 +17,11 @@
         <item name="primaryTextColor">@color/chimney_sweep</item>
     </style>
 
+    <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">
+        <!--header background-->
+        <item name="colorAccent">@color/blue_oyster_cult</item>
+
+    </style>
 
     <style name="Theme.App.JobanaSplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/blue_oyster_cult</item>

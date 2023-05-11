@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.kfd.jobana.databinding.FragmentLoginBinding
 import com.kfd.jobana.models.LoginRequest
@@ -18,10 +19,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
+
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
 
     private lateinit var btnLogin: MaterialButton
+    private lateinit var tvSignUp: AppCompatTextView
 
 
     override fun onCreateView(
@@ -32,8 +35,9 @@ class LoginFragment : Fragment() {
         val view = binding.root
 
         authViewModel.loginResponse.observe(viewLifecycleOwner) {
-
+            // TODO сделать переход на личный кабинет и проверку на ответ сервера
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+
 
         }
 
@@ -42,6 +46,11 @@ class LoginFragment : Fragment() {
             val email = binding.emailText.text.toString()
             val password = binding.passwordText.text.toString()
             authViewModel.loginUser(LoginRequest(email, password))
+        }
+
+        tvSignUp = binding.signupTextview
+        tvSignUp.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
         return view

@@ -29,13 +29,16 @@
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:hint="Имя"
         android:layout_marginTop="40dp"
+        app:helperTextTextColor="@color/poppy_surprize"
         app:layout_constraintTop_toBottomOf="@id/sign_up_text_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lines="1"
             android:textColor="?attr/primaryTextColor"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -53,8 +56,10 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/surname_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lines="1"
             android:textColor="?attr/primaryTextColor"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -90,14 +95,17 @@
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:layout_marginStart="40dp"
         android:hint="Дата рождения"
-        app:layout_constraintTop_toBottomOf="@id/surname_text_field"
+        app:layout_constraintTop_toTopOf="@id/gender_radio_group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/gender_radio_group"
         app:layout_constraintBottom_toBottomOf="@id/gender_radio_group">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/date_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="date"
+            android:lines="1"
             android:textColor="?attr/primaryTextColor"
             />
     </com.google.android.material.textfield.TextInputLayout>
@@ -109,15 +117,17 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:hint="Email"
-        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gender_radio_group"
         app:layout_constraintEnd_toEndOf="parent">
 
     <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:lines="1"
         android:textColor="?attr/primaryTextColor"
+        android:inputType="textEmailAddress"
         />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,14 +139,18 @@
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:layout_marginTop="20dp"
         android:hint="Пароль"
+        app:passwordToggleEnabled="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_text_field"
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/primaryTextColor"
+            android:lines="1"
+            android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -148,15 +162,19 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true"
         android:hint="Подтвердите пароль"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_text_field"
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_password_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?attr/primaryTextColor"
+            android:lines="1"
+            android:inputType="textPassword"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -182,4 +200,5 @@
         app:layout_constraintTop_toBottomOf="@id/sign_up_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
