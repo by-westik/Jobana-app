@@ -23,6 +23,8 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.regex.Pattern
 
+// TODO добавить валидацию данных в регистарции и авторизации
+// TODO вынести дату из фрагмента в хелпер
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
@@ -91,9 +93,6 @@ class SignUpFragment : Fragment() {
     ): View? {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
-        // Inflate the layout for this fragment
-
-
 
         authViewModel.loginResponse.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()

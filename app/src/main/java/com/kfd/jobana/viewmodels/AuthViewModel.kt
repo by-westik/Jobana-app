@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kfd.jobana.models.LoginRequest
-import com.kfd.jobana.models.LoginResponse
+import com.kfd.jobana.models.AuthResponse
 import com.kfd.jobana.models.RegisterRequest
 import com.kfd.jobana.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,8 @@ class AuthViewModel @Inject constructor(
     private val repository: AuthRepository
 ) : ViewModel() {
 
-    private val _loginResponse: MutableLiveData<LoginResponse> = MutableLiveData()
-    val loginResponse: LiveData<LoginResponse>
+    private val _loginResponse: MutableLiveData<AuthResponse> = MutableLiveData()
+    val loginResponse: LiveData<AuthResponse>
         get() = _loginResponse
 
     //TODO сделать обработку ошибок сервера
