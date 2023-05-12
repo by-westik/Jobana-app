@@ -31,12 +31,6 @@
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager">
         <action
-            android:id="@+id/action_viewPagerFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/viewPagerFragment"
-            app:popUpToInclusive="true"
-            />
-        <action
             android:id="@+id/action_viewPagerFragment_to_finishFragment"
             app:destination="@id/finishFragment"
             app:popUpTo="@id/viewPagerFragment"
@@ -49,15 +43,11 @@
         android:label="fragment_finish"
         tools:layout="@layout/fragment_finish">
         <action
-            android:id="@+id/action_finishFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/finishFragment"
-            app:popUpToInclusive="true"/>
-        <action
             android:id="@+id/action_finishFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/finishFragment"
             app:popUpToInclusive="true"/>
+
     </fragment>
 
     <fragment
@@ -85,6 +75,7 @@
         android:label="fragment_main_host"
         tools:layout="@layout/fragment_main_host"
         />
+
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.kfd.jobana.SignUpFragment"
@@ -96,6 +87,10 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true"/>
+
+        <action
+            android:id="@+id/action_signUpFragment_to_mainHostFragment"
+            app:destination="@id/mainHostFragment"/>
 
     </fragment>
 

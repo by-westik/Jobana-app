@@ -41,22 +41,20 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        authViewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            when (it){
+        authViewModel.loginResponse.observe(viewLifecycleOwner) {
+            when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
                         userPreferences.saveUserAuthToken(it.value.token)
                     }
                     findNavController().navigate(R.id.action_loginFragment_to_mainHostFragment)
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
                 else -> {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
             }
-            // TODO сделать переход на личный кабинет и проверку на ответ сервера
 
-        })
+        }
 
         btnLogin = binding.btnLogin
         btnLogin.setOnClickListener {

@@ -7,7 +7,6 @@ import com.kfd.jobana.models.RegisterRequest
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-// TODO добавить обработку ошибок
 interface AuthApiService {
     @POST(Constants.LOGIN_END_POINT)
     suspend fun loginUser(

@@ -31,7 +31,7 @@ class ViewPagerFragment : Fragment() {
         val view = binding.root
 
         viewPager2 = binding.viewPager
-        viewPager2.adapter = OnBoardingViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
+        viewPager2.adapter = OnBoardingViewPagerAdapter(requireContext(), requireActivity().supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.pageIndicator, viewPager2) { _, _ -> }.attach()
 
         tvPrevious = binding.tvPrevious
@@ -45,9 +45,9 @@ class ViewPagerFragment : Fragment() {
                     tvPrevious.visibility = View.VISIBLE
                 }
                 if (position == 2) {
-                    tvNext.text = "Завершить"
+                    tvNext.text = requireContext().resources.getString(R.string.end)
                 } else {
-                    tvNext.text = "Далее"
+                    tvNext.text = requireContext().resources.getString(R.string.next)
                 }
                 super.onPageSelected(position)
             }

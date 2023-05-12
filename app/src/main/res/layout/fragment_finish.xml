@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Используя это приложение Вы соглашаетесь с Политикой и Правилами использования"
+        android:text="@string/finish_description"
         android:gravity="center"
         android:textSize="16sp"
         android:textColor="@color/white"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/poppy_surprize"
-        android:text="Начать"
+        android:text="@string/start"
         android:layout_gravity="center"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -11,13 +11,18 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentSignUpBinding
+import com.kfd.jobana.helpers.Constants
 import com.kfd.jobana.models.RegisterRequest
+import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -33,6 +38,7 @@ class SignUpFragment : Fragment() {
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
 
+    private lateinit var userPreferences: UserPreferences
     private lateinit var btnSignUp: MaterialButton
     private lateinit var tvLogin: AppCompatTextView
     private lateinit var tvDate: TextInputEditText
@@ -79,12 +85,9 @@ class SignUpFragment : Fragment() {
                 }
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            override fun afterTextChanged(p0: Editable) {
-
-            }
+            override fun afterTextChanged(p0: Editable) {}
         }
 
     override fun onCreateView(
@@ -94,16 +97,30 @@ class SignUpFragment : Fragment() {
         _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        authViewModel.loginResponse.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+        userPreferences = UserPreferences(requireContext())
 
+        authViewModel.loginResponse.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        userPreferences.saveUserAuthToken(it.value.token)
+                    }
+                    findNavController().navigate(R.id.action_signUpFragment_to_mainHostFragment)
+                }
+                else -> {
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         btnSignUp = binding.signUpBtn
         btnSignUp.setOnClickListener {
             val firstName = binding.firstNameText.text.toString()
             val surname = binding.surnameText.text.toString()
-            val genderId = "F"
+            val genderId = when (binding.genderRadioGroup.checkedRadioButtonId) {
+                R.id.male_radio_button -> Constants.GENDER_MALE
+                else -> Constants.GENDER_FEMALE
+            }
             val date = binding.dateText.text.toString()
             val email = binding.emailText.text.toString()
             val password = binding.passwordText.text.toString()
@@ -138,16 +155,14 @@ class SignUpFragment : Fragment() {
     }
 
     private fun updateDate() {
-        val format = "dd-MM-yyyy"
-        val sdf = SimpleDateFormat(format, Locale.getDefault())
+        val sdf = SimpleDateFormat(Constants.DATE_FORMAT, Locale.getDefault())
         tvDate.setText(sdf.format(calendar.time))
     }
 
 
     private fun isValidEmail(email: String) : Boolean {
         if (email.isBlank()) return false
-        val emailRegex = "^[\\w-.]+@([\\w-]+.)+[\\w-]+$"
-        val pat = Pattern.compile(emailRegex)
+        val pat = Pattern.compile(Constants.EMAIL_REGEX)
         return pat.matcher(email).matches()
     }
 }

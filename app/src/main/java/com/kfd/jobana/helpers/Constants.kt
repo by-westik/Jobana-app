@@ -6,6 +6,9 @@ object Constants {
     const val LOGIN_END_POINT = "auth/login"
     const val REGISTER_END_POINT = "auth/signup"
 
-    val GENDERS = arrayOf("M", "F")
+    const val GENDER_MALE = "M"
+    const val GENDER_FEMALE = "F"
 
+    const val DATE_FORMAT = "dd-MM-yyyy"
+    const val EMAIL_REGEX = "^[\\w-.]+@([\\w-]+.)+[\\w-]+$"
 }

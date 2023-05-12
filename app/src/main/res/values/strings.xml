@@ -2,4 +2,34 @@
     <string name="app_name">Jobana</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- OnBoarding and finish screens text -->
+    <string name="title_1">Создавайте объявления</string>
+    <string name="title_2">Общайтесь в чате</string>
+    <string name="title_3">Единый профиль</string>
+
+    <string name="description_1">Создавайте, размещайте и редактируйте объявления не выходя из приложения</string>
+    <string name="description_2">Обсуждайте детали заказа и исполнения с закачиками и специалистами</string>
+    <string name="description_3">Попробуйте себя в обоих ролях без дополнительной регистрации</string>
+
+    <string name="end">Завершить</string>
+    <string name="next">Далее</string>
+    <string name="finish_description">Используя это приложение Вы соглашаетесь с Политикой и Правилами использования</string>
+    <string name="start">Начать</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="name_hint">Имя</string>
+    <string name="surname_hint">Фамилия</string>
+    <string name="male">М</string>
+    <string name="female">Ж</string>
+    <string name="date_hint">Дата рождения</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Пароль</string>
+    <string name="confirm_password_hint">Подтвердите пароль</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="login_sentence">Уже есть аккаунт? Войти</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="login">Войти</string>
+    <string name="signup_sentence">Еще нет аккаунта? Зарегистрироваться</string>
+    <string name="skip">Пропустить</string>
+    <string name="previous">Назад</string>
 </resources>

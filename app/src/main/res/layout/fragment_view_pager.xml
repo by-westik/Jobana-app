@@ -10,7 +10,7 @@
         android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Пропустить"
+        android:text="@string/skip"
         android:textSize="18sp"
         android:layout_alignParentEnd="true"
         android:layout_margin="30dp"/>
@@ -40,7 +40,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
             android:visibility="visible"
-            android:text="Назад"
+            android:text="@string/previous"
             android:textSize="18sp" />
 
         <com.google.android.material.tabs.TabLayout
@@ -56,7 +56,7 @@
             android:id="@+id/tv_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Далее"
+            android:text="@string/next"
             android:textSize="18sp"
             android:layout_margin="30dp"
             android:layout_centerVertical="true"

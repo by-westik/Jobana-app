@@ -13,9 +13,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-
-        val userPreferences = UserPreferences(this)
-        Toast.makeText(this, "${userPreferences.authToken}", Toast.LENGTH_LONG).show()
         setContentView(R.layout.activity_main)
 
     }

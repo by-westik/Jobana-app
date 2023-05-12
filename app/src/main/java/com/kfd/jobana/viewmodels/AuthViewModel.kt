@@ -24,7 +24,6 @@ class AuthViewModel @Inject constructor(
     val loginResponse: LiveData<Resource<AuthResponse>>
         get() = _loginResponse
 
-    //TODO сделать обработку ошибок сервера
     fun loginUser(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.loginUser(loginRequest)
     }
