@@ -5,5 +5,5 @@ data class AuthResponse (
     val token: String,
     val status: String,
     val message: String,
-    val timestamp: List<Int>
+    val timestamp: String
 )

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment"
+    android:id="@+id/main_nav">
+
+    <fragment
+        android:id="@+id/personalAccountFragment"
+        android:name="com.kfd.jobana.PersonalAccountFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_personal_account" />
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.kfd.jobana.MainFragment"
+        android:label="Главная"
+        tools:layout="@layout/fragment_main"/>
+
+</navigation>

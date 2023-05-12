@@ -47,14 +47,14 @@ class LoginFragment : Fragment() {
                     lifecycleScope.launch {
                         userPreferences.saveUserAuthToken(it.value.token)
                     }
+                    findNavController().navigate(R.id.action_loginFragment_to_mainHostFragment)
+                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
                 else -> {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
             }
             // TODO сделать переход на личный кабинет и проверку на ответ сервера
-
-
 
         })
 

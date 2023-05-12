@@ -73,13 +73,18 @@
             app:popUpToInclusive="true"/>
 
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_loginFragment_to_mainHostFragment"
+            app:destination="@id/mainHostFragment"/>
 
     </fragment>
 
+
+    <fragment
+        android:id="@+id/mainHostFragment"
+        android:name="com.kfd.jobana.MainHostFragment"
+        android:label="fragment_main_host"
+        tools:layout="@layout/fragment_main_host"
+        />
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.kfd.jobana.SignUpFragment"
@@ -92,11 +97,6 @@
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="true"/>
 
-        <action
-            android:id="@+id/action_signUpFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/signUpFragment"
-            app:popUpToInclusive="true"/>
-
     </fragment>
+
 </navigation>
