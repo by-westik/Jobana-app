@@ -1,4 +1,4 @@
-package com.kfd.jobana.onboarding
+package com.kfd.jobana.ui.onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

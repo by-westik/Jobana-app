@@ -1,12 +1,15 @@
 package com.kfd.jobana.repository
 
+import com.kfd.jobana.data.UserPreferences
+import com.kfd.jobana.models.requests.LoginRequest
+import com.kfd.jobana.models.requests.RegisterRequest
 import com.kfd.jobana.network.AuthApiService
-import com.kfd.jobana.models.LoginRequest
-import com.kfd.jobana.models.RegisterRequest
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val apiService: AuthApiService) :
-    BaseRepository() {
+class AuthRepository @Inject constructor(
+    private val apiService: AuthApiService,
+    private val preferences: UserPreferences
+) : BaseRepository() {
 
     suspend fun loginUser (
         loginRequest: LoginRequest
@@ -18,6 +21,10 @@ class AuthRepository @Inject constructor(private val apiService: AuthApiService)
         registerRequest: RegisterRequest
     ) = safeApiCall {
         apiService.registerUser(registerRequest)
+    }
+
+    suspend fun saveUserAuthToken(token: String) {
+        preferences.saveUserAuthToken(token)
     }
 
 }

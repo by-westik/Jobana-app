@@ -1,4 +1,4 @@
-package com.kfd.jobana.models
+package com.kfd.jobana.models.requests
 
 data class RegisterRequest(
     val email: String,

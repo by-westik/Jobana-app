@@ -1,4 +1,4 @@
-package com.kfd.jobana.models
+package com.kfd.jobana.models.responses
 
 // TODO доавить enum клас для Response чтобы обрабатывать случаи, когла сервер не работает и другие ошибки
 data class AuthResponse (

@@ -1,4 +1,4 @@
-package com.kfd.jobana
+package com.kfd.jobana.ui.auth
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -15,10 +15,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.kfd.jobana.R
 import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentSignUpBinding
 import com.kfd.jobana.helpers.Constants
-import com.kfd.jobana.models.RegisterRequest
+import com.kfd.jobana.models.requests.RegisterRequest
 import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint

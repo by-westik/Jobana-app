@@ -6,6 +6,8 @@ object Constants {
     const val LOGIN_END_POINT = "auth/login"
     const val REGISTER_END_POINT = "auth/signup"
 
+
+
     const val GENDER_MALE = "M"
     const val GENDER_FEMALE = "F"
 

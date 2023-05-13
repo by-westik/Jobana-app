@@ -1,4 +1,4 @@
-package com.kfd.jobana
+package com.kfd.jobana.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
-import com.kfd.jobana.data.UserPreferences
+import com.kfd.jobana.R
 import com.kfd.jobana.databinding.FragmentLoginBinding
-import com.kfd.jobana.models.LoginRequest
+import com.kfd.jobana.models.requests.LoginRequest
 import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -28,7 +25,6 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private val authViewModel: AuthViewModel by viewModels()
 
-    private lateinit var userPreferences: UserPreferences
     private lateinit var btnLogin: MaterialButton
     private lateinit var tvSignUp: AppCompatTextView
 
@@ -37,16 +33,13 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        userPreferences = UserPreferences(requireContext())
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
 
         authViewModel.loginResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    lifecycleScope.launch {
-                        userPreferences.saveUserAuthToken(it.value.token)
-                    }
+                    authViewModel.saveUserAuthToken(it.value.token)
                     findNavController().navigate(R.id.action_loginFragment_to_mainHostFragment)
                 }
                 else -> {

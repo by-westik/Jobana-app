@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/personalAccountFragment"
-        android:name="com.kfd.jobana.PersonalAccountFragment"
+        android:name="com.kfd.jobana.ui.home.PersonalAccountFragment"
         android:label="Профиль"
         tools:layout="@layout/fragment_personal_account" />
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.kfd.jobana.MainFragment"
+        android:name="com.kfd.jobana.ui.home.MainFragment"
         android:label="Главная"
         tools:layout="@layout/fragment_main"/>
 

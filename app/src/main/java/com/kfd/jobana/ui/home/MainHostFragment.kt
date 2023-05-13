@@ -1,23 +1,21 @@
-package com.kfd.jobana
+package com.kfd.jobana.ui.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.kfd.jobana.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
+import com.kfd.jobana.R
 import com.kfd.jobana.databinding.FragmentMainHostBinding
 
 class MainHostFragment : Fragment() {
     private var _binding: FragmentMainHostBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomMenu: BottomNavigationView
+    private lateinit var viewPager: ViewPager2
 
 
     override fun onCreateView(
@@ -27,16 +25,28 @@ class MainHostFragment : Fragment() {
         _binding = FragmentMainHostBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        viewPager = binding.viewPager
 
         bottomMenu = binding.bottomMenu
+        viewPager.adapter = MainAdapter(parentFragmentManager, lifecycle)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> bottomMenu.selectedItemId = R.id.mainFragment
+                    else -> bottomMenu.selectedItemId = R.id.personalAccountFragment
+                }
+                super.onPageSelected(position)
+            }
+        })
         bottomMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.mainFragment -> {
-                    loadFragment(MainFragment())
+                    viewPager.currentItem = 0
                     true
                 }
                 R.id.personalAccountFragment -> {
-                    loadFragment(PersonalAccountFragment())
+                    viewPager.currentItem = 1
                     true
                 }
                 else -> true
@@ -46,9 +56,4 @@ class MainHostFragment : Fragment() {
         return view
     }
 
-    private fun loadFragment(fragment: Fragment) {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.main_nav_host_fragment, fragment)
-            .commit()
-    }
 }

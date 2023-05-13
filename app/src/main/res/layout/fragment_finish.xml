@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/blue_oyster_cult"
     android:paddingHorizontal="30dp"
-    tools:context=".onboarding.FinishFragment">
+    tools:context=".ui.onboarding.FinishFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/finish_image"

@@ -1,4 +1,4 @@
-package com.kfd.jobana.onboarding
+package com.kfd.jobana.ui.onboarding
 
 import android.content.Context
 import android.os.Bundle
