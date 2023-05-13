@@ -42,18 +42,18 @@ class UserAdvertsFragment : Fragment() {
     }
 
     private fun setupRv() {
-        adapter = AdvertsAdapter(listOf())
+        adapter = AdvertsAdapter(listOf(), requireContext(), advertViewModel, viewLifecycleOwner)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) {
-            when (it) {
+        advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) { advertResponse ->
+            when (advertResponse) {
                 is Resource.Success -> {
-                    adapter.updateAdapter(it.value)
+                    adapter.updateAdapter(advertResponse.value)
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), advertResponse.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         }

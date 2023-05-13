@@ -10,6 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface AdvertApiService {
 
@@ -23,19 +24,19 @@ interface AdvertApiService {
 
     @PUT("adverts/{id}")
     suspend fun changeAdvert(
-        id: String,
+        @Path("id") id: String,
         @Body advertRequest: AdvertRequest
     ) : AdvertResponse
 
     @PATCH("adverts/{id}")
     suspend fun closeOpenAdvert(
-        id: String,
+        @Path("id") id: String,
         @Body closeRequest: CloseRequest
     ) : BaseResponse
 
     @DELETE("adverts/{id}")
     suspend fun deleteAdvert(
-        id: String
+        @Path("id") id: String
     ) : BaseResponse
 
     //TODO добавить обработку фоток потом

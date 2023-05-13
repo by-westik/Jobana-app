@@ -16,7 +16,8 @@
             android:id="@+id/imv_advert"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@color/chimney_sweep"
+            android:scaleType="centerCrop"
+            android:backgroundTint="?attr/inputTextIcon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

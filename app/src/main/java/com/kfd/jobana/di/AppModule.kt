@@ -6,6 +6,7 @@ import android.util.Log
 import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.helpers.Constants
 import com.kfd.jobana.network.AdvertApiService
+import com.kfd.jobana.network.AttachmentApiService
 import com.kfd.jobana.network.AuthApiService
 import dagger.Module
 import dagger.Provides
@@ -18,6 +19,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -30,6 +32,8 @@ object AppModule {
     @Provides
     fun provideUserPreferences(@ApplicationContext context: Context) = UserPreferences(context)
 
+
+    //TODO сделать фунцкию для provide token and interceptor
     @Provides
     @Singleton
     fun provideAuthApiService(BASE_URL: String) : AuthApiService =
@@ -58,11 +62,12 @@ object AppModule {
                         chain.proceed(chain.request().newBuilder().also {
                             runBlocking {
                                 val token = userPreferences?.authToken?.first()
-                                Log.d(TAG, "TOKEN = ${token}")
+                                Log.d(TAG, "TOKEN = $token")
                                 it.addHeader("Authorization", "Bearer $token")
                             }
                         }.build())
-                    }.also { client ->
+                    }
+                    .also { client ->
                     val logging = HttpLoggingInterceptor()
                     logging.setLevel(HttpLoggingInterceptor.Level.BODY)
                     client.addInterceptor(logging)
@@ -71,6 +76,34 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AdvertApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAttachmentApiService(BASE_URL: String, userPreferences: UserPreferences? = null) : AttachmentApiService =
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        chain.proceed(chain.request().newBuilder().also {
+                            runBlocking {
+                                val token = userPreferences?.authToken?.first()
+                                Log.d(TAG, "TOKEN = $token")
+                                it.addHeader("Authorization", "Bearer $token")
+                            }
+                        }.build())
+                    }
+                    .callTimeout(15, TimeUnit.SECONDS)
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .also { client ->
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                    }.build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AttachmentApiService::class.java)
 
 
 }
