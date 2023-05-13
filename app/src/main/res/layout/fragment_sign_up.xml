@@ -29,7 +29,7 @@
         app:boxStrokeColor="@color/blue_oyster_cult"
         android:hint="@string/name_hint"
         android:layout_marginTop="40dp"
-        app:helperTextTextColor="@color/poppy_surprize"
+        app:helperTextTextColor="?attr/accentColor"
         app:layout_constraintTop_toBottomOf="@id/sign_up_text_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

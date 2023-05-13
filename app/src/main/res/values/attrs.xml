@@ -3,4 +3,5 @@
     <attr name="inputTextIcon" format="reference|color"/>
     <attr name="inputTextStroke" format="reference|color"/>
     <attr name="primaryTextColor" format="reference|color"/>
+    <attr name="accentColor" format="reference|color"/>
 </resources>

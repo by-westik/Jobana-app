@@ -68,13 +68,16 @@
 
     </fragment>
 
-
     <fragment
         android:id="@+id/mainHostFragment"
         android:name="com.kfd.jobana.ui.home.MainHostFragment"
         android:label="fragment_main_host"
         tools:layout="@layout/fragment_main_host"
-        />
+        >
+        <action
+            android:id="@+id/action_mainHostFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/signUpFragment"
@@ -93,5 +96,34 @@
             app:destination="@id/mainHostFragment"/>
 
     </fragment>
+
+    <fragment
+        android:id="@+id/personalAccountFragment"
+        android:name="com.kfd.jobana.ui.home.PersonalAccountFragment"
+        android:label="Профиль"
+        tools:layout="@layout/fragment_personal_account" >
+        <action
+            android:id="@+id/action_personalAccountFragment_to_userAdvertsFragment"
+            app:destination="@id/userAdvertsFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/personalAccountFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/userAdvertsFragment"
+        android:name="com.kfd.jobana.ui.home.UserAdvertsFragment"
+        android:label="Мои объявления"
+        tools:layout="@layout/fragment_user_adverts"/>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.kfd.jobana.ui.home.MainFragment"
+        android:label="Главная"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_mainFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment"/>
+    </fragment>
+
 
 </navigation>

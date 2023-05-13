@@ -15,6 +15,7 @@
         <item name="inputTextIcon">@color/spanish_grey</item>
         <item name="inputTextStroke">@color/snowflake</item>
         <item name="primaryTextColor">@color/chimney_sweep</item>
+        <item name="accentColor">@color/poppy_surprise</item>
     </style>
 
     <style name="CustomDatePickerDialog" parent="ThemeOverlay.AppCompat.Dialog">

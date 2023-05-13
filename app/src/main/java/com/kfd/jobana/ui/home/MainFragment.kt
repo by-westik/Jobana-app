@@ -36,9 +36,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        binding.btnTest.setOnClickListener {
-            advertViewModel.getUserAdverts()
-        }
+
 
 
         return binding.root

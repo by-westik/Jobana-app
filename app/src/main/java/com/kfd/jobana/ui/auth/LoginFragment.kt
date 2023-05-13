@@ -14,6 +14,7 @@ import com.kfd.jobana.R
 import com.kfd.jobana.databinding.FragmentLoginBinding
 import com.kfd.jobana.models.requests.LoginRequest
 import com.kfd.jobana.models.Resource
+import com.kfd.jobana.ui.home.MainHostFragment
 import com.kfd.jobana.viewmodels.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,7 +41,9 @@ class LoginFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     authViewModel.saveUserAuthToken(it.value.token)
+                 //   parentFragmentManager.beginTransaction().replace(R.id.loginFragment, MainHostFragment()).commit()
                     findNavController().navigate(R.id.action_loginFragment_to_mainHostFragment)
+                    onDestroy()
                 }
                 else -> {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
