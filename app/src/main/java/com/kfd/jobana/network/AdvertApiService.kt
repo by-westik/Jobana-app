@@ -4,6 +4,7 @@ import com.kfd.jobana.models.BaseResponse
 import com.kfd.jobana.models.CloseRequest
 import com.kfd.jobana.models.requests.AdvertRequest
 import com.kfd.jobana.models.responses.AdvertResponse
+import com.kfd.jobana.models.responses.AllAdvertsResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -16,6 +17,9 @@ interface AdvertApiService {
 
     @GET("adverts/my")
     suspend fun getUserAdverts() : List<AdvertResponse>
+
+    @GET("adverts")
+    suspend fun getAllAdverts() : AllAdvertsResponse
 
     @POST("adverts")
     suspend fun createAdvert(

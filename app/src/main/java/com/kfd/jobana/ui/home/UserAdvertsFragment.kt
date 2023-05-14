@@ -42,7 +42,7 @@ class UserAdvertsFragment : Fragment() {
 
         recyclerView = binding.recyclerViewUserAdverts
         setupRv()
-        advertViewModel.getAllInf()
+        advertViewModel.getUserAdverts()
 
         return view
     }
@@ -67,7 +67,7 @@ class UserAdvertsFragment : Fragment() {
             }
         }*/
 
-        advertViewModel.repsonse.observe(viewLifecycleOwner) {
+        advertViewModel.response.observe(viewLifecycleOwner) {
             adapter.updateAdapter(it)
         }
 

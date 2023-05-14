@@ -21,26 +21,25 @@ class AdvertViewModel @Inject constructor(
     private val advertRepository: AdvertRepository
 ) : ViewModel() {
 
-    private val _allAdvertResponse: MutableLiveData<Resource<List<AdvertResponse>>> = MutableLiveData()
-    val allAdvertResponse: LiveData<Resource<List<AdvertResponse>>>
-        get() = _allAdvertResponse
-
     private val _response: MutableLiveData<List<AdvertItem>> = MutableLiveData()
-    val repsonse: LiveData<List<AdvertItem>>
+    val response: LiveData<List<AdvertItem>>
         get() = _response
-    init {
-        viewModelScope.launch {
-            _allAdvertResponse.value = advertRepository.getUserAdverts()
-        }
-    }
 
-    fun getAllInf() = viewModelScope.launch{
-        advertRepository.getAdverts({
+    fun getUserAdverts() = viewModelScope.launch{
+        advertRepository.getUserAdverts({
             _response.postValue(it)
         }, { error ->
-            Log.d(TAG, "$error")
+            Log.d(TAG, "User $error")
         })
 
+    }
+
+    fun getAllAdverts() = viewModelScope.launch {
+        advertRepository.getAllAdverts({
+            _response.postValue(it)
+        }, { error ->
+            Log.d(TAG, "All $error")
+        })
     }
 
 

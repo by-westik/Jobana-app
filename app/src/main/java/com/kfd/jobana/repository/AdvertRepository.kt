@@ -17,10 +17,7 @@ class AdvertRepository @Inject constructor(
     private val attachmentApiService: AttachmentApiService,
 ) : BaseRepository() {
 
-    suspend fun getUserAdverts() = safeApiCall {
-        advertApiService.getUserAdverts()
-    }
-    suspend fun getAdverts(resFunc: (adverts: List<AdvertItem>) -> Unit, error: (exception: String) -> Unit)  {
+    suspend fun getUserAdverts(resFunc: (adverts: List<AdvertItem>) -> Unit, error: (exception: String) -> Unit)  {
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 val userAdvertResponse = async {
@@ -53,6 +50,49 @@ class AdvertRepository @Inject constructor(
                         city = advert.city,
                         categories = advert.categories,
                         isClosed = advert.isClosed)
+                    )
+                }
+                resFunc(result)
+            }
+        } catch (e: Exception) {
+            e.message?.let { error(it) }
+
+        }
+    }
+    // TODO потом подумать и исправить эти функции чтобы не было повторения кода
+    suspend fun getAllAdverts(resFunc: (adverts: List<AdvertItem>) -> Unit, error: (exception: String) -> Unit)  {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val userAdvertResponse = async {
+                    advertApiService.getAllAdverts()
+                }
+//TODO добавить обработку фильтрации, сортировки и пагинацию
+                val resUserAdvertResponse = userAdvertResponse.await()
+
+                var result = mutableListOf<AdvertItem>()
+                resUserAdvertResponse.content.forEach {advert ->
+                    val attachRes = mutableListOf<ByteArray>()
+                    if (advert.attachments.isNotEmpty()) {
+                        advert.attachments.forEach {
+                            val byteArray = withContext(Dispatchers.IO) {
+                                attachmentApiService.getAttachment(it).bytes()
+                            }
+                            attachRes.add(byteArray)
+                        }
+                    }
+                    result.add(
+                        AdvertItem(
+                            id = advert.id,
+                            authorId = advert.authorId,
+                            title = advert.title,
+                            shortDescription = advert.shortDescription,
+                            description = advert.description,
+                            createdAt = advert.createdAt,
+                            attachments = attachRes,
+                            price = advert.price,
+                            city = advert.city,
+                            categories = advert.categories,
+                            isClosed = advert.isClosed)
                     )
                 }
                 resFunc(result)

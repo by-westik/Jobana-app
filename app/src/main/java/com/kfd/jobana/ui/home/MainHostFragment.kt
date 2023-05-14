@@ -25,7 +25,7 @@ class MainHostFragment : Fragment() {
         val view = binding.root
 
         bottomMenu = binding.bottomMenu
-
+        // TODO Подумать лучше о навигации и di или кэширвоании, потому что сейчас при переходе туда-сюда вся инфаормация скачивается заново
         bottomMenu.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.mainFragment -> {

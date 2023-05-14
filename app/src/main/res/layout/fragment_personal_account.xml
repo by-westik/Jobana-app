@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".ui.home.PersonalAccountFragment"
     android:backgroundTint="@color/white">
 
@@ -21,7 +22,7 @@
             android:id="@+id/imv_profile"
             android:layout_width="95dp"
             android:layout_height="95dp"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/images_placeholder"
