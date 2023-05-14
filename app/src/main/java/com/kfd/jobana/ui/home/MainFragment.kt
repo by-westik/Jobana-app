@@ -18,23 +18,23 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private val advertViewModel: AdvertViewModel by viewModels()
+       //     private val advertViewModel: AdvertViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) {
+     /*   advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                   // Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                   // Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
             }
-        }
+        }*/
 
 
 

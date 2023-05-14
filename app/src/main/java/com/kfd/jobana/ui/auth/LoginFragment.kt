@@ -41,12 +41,11 @@ class LoginFragment : Fragment() {
             when (it) {
                 is Resource.Success -> {
                     authViewModel.saveUserAuthToken(it.value.token)
-                 //   parentFragmentManager.beginTransaction().replace(R.id.loginFragment, MainHostFragment()).commit()
                     findNavController().navigate(R.id.action_loginFragment_to_mainHostFragment)
                     onDestroy()
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                 //   Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
             }
 

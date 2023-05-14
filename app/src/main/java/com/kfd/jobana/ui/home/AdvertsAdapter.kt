@@ -37,22 +37,68 @@ class AdvertViewHolder(
     private val context: Context,
     private val binding: AdvertItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+    fun bind(advert: AdvertItem) {
+        binding.apply {
+            tvAdvertTitle.text = advert.title
+            tvShortDescription.text = advert.shortDescription
+            // TODO исправить это замечание с ценой потом
+            tvPrice.text = "Цена: ${advert.price}р."
+            if (advert.attachments.isNotEmpty()) {
+                val bitmap = BitmapFactory.decodeByteArray(advert.attachments[0], 0, advert.attachments[0].size)
+                if (bitmap != null) {
+                    imvAdvert.setImageBitmap(bitmap)
+
+                }
+            }
+
+        }
+    }
+}
+class AdvertsAdapter(
+    private var activity: Activity,
+    private var adverts: List<AdvertItem>,
+    private val context: Context,
+    private val onItemClick: () -> Unit
+) : RecyclerView.Adapter<AdvertViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvertViewHolder {
+        return AdvertViewHolder(activity, context, AdvertItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    }
+
+    override fun getItemCount() = adverts.size
+
+    override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) {
+        val advert = adverts[position]
+
+        holder.bind(advert)
+
+        holder.itemView.setOnClickListener {
+            onItemClick()
+        }
+
+    }
+    fun updateAdapter(list: List<AdvertItem>) {
+        this.adverts = list
+        notifyDataSetChanged()
+    }
+}
+
+/*
+class AdvertViewHolder(
+    private val activity: Activity,
+    private val context: Context,
+    private val binding: AdvertItemBinding
+) : RecyclerView.ViewHolder(binding.root) {
     fun bind(advert: AdvertResponse) {
         binding.apply {
             tvAdvertTitle.text = advert.title
             tvShortDescription.text = advert.shortDescription
             // TODO исправить это замечание с ценой потом
             tvPrice.text = "Цена: ${advert.price}р."
-            if (advert.attachments.isEmpty()) {
-                Log.d(TAG, "0")
-                imvAdvert.setImageDrawable(context.resources.getDrawable(R.drawable.work))
-            } else {
-
+            if (advert.attachments.isNotEmpty()) {
                 val okHttpClient = OkHttpClient()
                 val request = Request.Builder().url(Constants.BASE_URL + "files/" + advert.attachments[0]).also {
                     runBlocking {
                         val token = UserPreferences(context).authToken.first()
-                        Log.d(TAG, "$token")
                         it.addHeader("Authorization", "Bearer $token")
                     }
                 }.build()
@@ -107,4 +153,4 @@ class AdvertsAdapter(
         this.adverts = list
         notifyDataSetChanged()
     }
-}
+}*/

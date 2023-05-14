@@ -10,9 +10,9 @@ import retrofit2.http.Path
 interface AttachmentApiService {
 
     @GET("files/{attachment_id}")
-    fun getAttachment(
+    suspend fun getAttachment(
         @Path("attachment_id") id: String
-    ) : Call
+    ) : ResponseBody
 
     @DELETE("files/{attachment_id}")
     suspend fun deleteAttachment(

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.UserAdvertsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO Добавить загрузчик на время подгрузки с сервера -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_user_adverts"

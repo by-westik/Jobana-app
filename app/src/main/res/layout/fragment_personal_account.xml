@@ -15,6 +15,7 @@
         android:layout_marginBottom="10dp">
 
         <!-- TODO добавить потом скругленные углы возможно -->
+        <!-- TODO добавить нормальный placeholder на картинку -->
 
         <ImageView
             android:id="@+id/imv_profile"
@@ -23,14 +24,14 @@
             android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:background="@drawable/images_placeholder"
+            android:backgroundTint="?attr/inputTextStroke"/>
 
         <TextView
             android:id="@+id/tv_fio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="Иван Иванов"
             android:textSize="16sp"
             android:textColor="?attr/primaryTextColor"
             app:layout_constraintBottom_toTopOf="@id/tv_email"
@@ -42,7 +43,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:text="user123@mail.ru"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/imv_profile"
             app:layout_constraintStart_toEndOf="@id/imv_profile"

@@ -1,6 +1,7 @@
 package com.kfd.jobana.ui.home
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -41,6 +42,7 @@ class UserAdvertsFragment : Fragment() {
 
         recyclerView = binding.recyclerViewUserAdverts
         setupRv()
+        advertViewModel.getAllInf()
 
         return view
     }
@@ -56,15 +58,17 @@ class UserAdvertsFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) { advertResponse ->
+     /*   advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) { advertResponse ->
             when (advertResponse) {
                 is Resource.Success -> {
                     adapter.updateAdapter(advertResponse.value)
                 }
-                else -> {
-                    Toast.makeText(requireContext(), advertResponse.toString(), Toast.LENGTH_LONG).show()
-                }
+                else -> {}
             }
+        }*/
+
+        advertViewModel.repsonse.observe(viewLifecycleOwner) {
+            adapter.updateAdapter(it)
         }
 
     }

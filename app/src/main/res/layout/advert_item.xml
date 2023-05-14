@@ -17,7 +17,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:backgroundTint="?attr/inputTextIcon"
+            android:background="@drawable/images_placeholder"
+            android:backgroundTint="?attr/inputTextStroke"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -62,16 +63,6 @@
             app:layout_constraintTop_toBottomOf="@id/tv_short_description"
             app:layout_constraintBottom_toBottomOf="@id/imv_advert"
             app:layout_constraintStart_toEndOf="@id/imv_advert"/>
-
-        <ImageButton
-            android:id="@+id/btn_respond"
-            android:src="@drawable/settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?attr/accentColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

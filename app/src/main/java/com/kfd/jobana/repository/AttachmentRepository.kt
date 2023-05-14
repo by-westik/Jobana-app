@@ -8,7 +8,7 @@ class AttachmentRepository @Inject constructor(
     private val attachmentApiService: AttachmentApiService
 ) : BaseRepository() {
 
-    fun getAttachment(id: String) = attachmentApiService.getAttachment(id)
+    //fun getAttachment(id: String) = attachmentApiService.getAttachment(id)
 
 
     suspend fun deleteAttachment(id: String) = safeApiCall {

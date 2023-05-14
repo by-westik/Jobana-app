@@ -8,6 +8,7 @@ import com.kfd.jobana.helpers.Constants
 import com.kfd.jobana.network.AdvertApiService
 import com.kfd.jobana.network.AttachmentApiService
 import com.kfd.jobana.network.AuthApiService
+import com.kfd.jobana.network.UserApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,7 +63,6 @@ object AppModule {
                         chain.proceed(chain.request().newBuilder().also {
                             runBlocking {
                                 val token = userPreferences?.authToken?.first()
-                                Log.d(TAG, "TOKEN = $token")
                                 it.addHeader("Authorization", "Bearer $token")
                             }
                         }.build())
@@ -77,6 +77,33 @@ object AppModule {
             .build()
             .create(AdvertApiService::class.java)
 
+
+    @Provides
+    @Singleton
+    fun provideUserApiService(BASE_URL: String, userPreferences: UserPreferences? = null) : UserApiService =
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor { chain ->
+                        chain.proceed(chain.request().newBuilder().also {
+                            runBlocking {
+                                val token = userPreferences?.authToken?.first()
+                                it.addHeader("Authorization", "Bearer $token")
+                            }
+                        }.build())
+                    }
+                    .also { client ->
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                    }.build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(UserApiService::class.java)
+
+
     @Provides
     @Singleton
     fun provideAttachmentApiService(BASE_URL: String, userPreferences: UserPreferences? = null) : AttachmentApiService =
@@ -88,7 +115,6 @@ object AppModule {
                         chain.proceed(chain.request().newBuilder().also {
                             runBlocking {
                                 val token = userPreferences?.authToken?.first()
-                                Log.d(TAG, "TOKEN = $token")
                                 it.addHeader("Authorization", "Bearer $token")
                             }
                         }.build())

@@ -109,7 +109,7 @@ class SignUpFragment : Fragment() {
                     findNavController().navigate(R.id.action_signUpFragment_to_mainHostFragment)
                 }
                 else -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                  //  Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
                 }
             }
         }
