@@ -1,6 +1,8 @@
 package com.kfd.jobana.ui.home
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +12,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kfd.jobana.R
+import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentPersonalAccountBinding
 import com.kfd.jobana.databinding.FragmentUserAdvertsBinding
 import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AdvertViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UserAdvertsFragment : Fragment() {
@@ -37,12 +41,17 @@ class UserAdvertsFragment : Fragment() {
 
         recyclerView = binding.recyclerViewUserAdverts
         setupRv()
-        advertViewModel.getUserAdverts()
+
         return view
+    }
+    private fun click() {
+        parentFragmentManager.beginTransaction().replace(R.id.fragmentMainContainerView, AdvertFragment()).commit()
     }
 
     private fun setupRv() {
-        adapter = AdvertsAdapter(listOf(), requireContext(), advertViewModel, viewLifecycleOwner)
+        adapter = AdvertsAdapter(
+            requireActivity(), listOf(), requireContext()
+        ) { click() }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -57,6 +66,7 @@ class UserAdvertsFragment : Fragment() {
                 }
             }
         }
+
     }
 
 }

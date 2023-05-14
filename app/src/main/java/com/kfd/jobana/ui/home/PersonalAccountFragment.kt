@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
 import com.kfd.jobana.R
+import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentPersonalAccountBinding
 
 
