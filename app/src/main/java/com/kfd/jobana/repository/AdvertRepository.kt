@@ -114,6 +114,43 @@ class AdvertRepository @Inject constructor(
         advertApiService.closeOpenAdvert(id, CloseRequest(isClosed))
     }
 
+    suspend fun getAdvertById(id: String, resFunc: (advert: AdvertItem) -> Unit, error: (exception: String) -> Unit)  {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val userAdvertResponse = async {
+                    advertApiService.getAdvertById(id)
+                }
+
+                val resUserAdvertResponse = userAdvertResponse.await()
+                val attachRes = mutableListOf<ByteArray>()
+
+                if (resUserAdvertResponse.attachments.isNotEmpty()) {
+                    resUserAdvertResponse.attachments.forEach {
+                        val byteArray = withContext(Dispatchers.IO) {
+                            attachmentApiService.getAttachment(it).bytes()
+                        }
+                        attachRes.add(byteArray)
+                    }
+                }
+                val res = AdvertItem(
+                    id = resUserAdvertResponse.id,
+                    authorId = resUserAdvertResponse.authorId,
+                    title = resUserAdvertResponse.title,
+                    shortDescription = resUserAdvertResponse.shortDescription,
+                    description = resUserAdvertResponse.description,
+                    createdAt = resUserAdvertResponse.createdAt,
+                    attachments = attachRes,
+                    price = resUserAdvertResponse.price,
+                    city = resUserAdvertResponse.city,
+                    categories = resUserAdvertResponse.categories,
+                    isClosed = resUserAdvertResponse.isClosed)
+                resFunc(res)
+            }
+        } catch (e: Exception) {
+            e.message?.let { error(it) }
+        }
+    }
+
     suspend fun deleteAdvert(id: String) = safeApiCall {
         advertApiService.deleteAdvert(id)
     }

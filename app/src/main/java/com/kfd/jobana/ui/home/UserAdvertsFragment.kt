@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kfd.jobana.R
+import com.kfd.jobana.data.AdvertItem
 import com.kfd.jobana.data.UserPreferences
 import com.kfd.jobana.databinding.FragmentPersonalAccountBinding
 import com.kfd.jobana.databinding.FragmentUserAdvertsBinding
@@ -46,26 +47,21 @@ class UserAdvertsFragment : Fragment() {
 
         return view
     }
-    private fun click() {
-        parentFragmentManager.beginTransaction().replace(R.id.fragmentMainContainerView, AdvertFragment()).commit()
+    private fun click(advertId: String) {
+        val editAdvertFragment = EditAdvertFragment()
+        val id = Bundle()
+        id.putString("ID", advertId)
+        editAdvertFragment.arguments = id
+        parentFragmentManager.beginTransaction().replace(R.id.fragmentMainContainerView, editAdvertFragment).commit()
     }
 
     private fun setupRv() {
+        val advertClick = {advert: AdvertItem -> click(advert.id)}
         adapter = AdvertsAdapter(
-            requireActivity(), listOf(), requireContext()
-        ) { click() }
+            requireActivity(), listOf(), requireContext(), advertClick)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-     /*   advertViewModel.allAdvertResponse.observe(viewLifecycleOwner) { advertResponse ->
-            when (advertResponse) {
-                is Resource.Success -> {
-                    adapter.updateAdapter(advertResponse.value)
-                }
-                else -> {}
-            }
-        }*/
 
         advertViewModel.response.observe(viewLifecycleOwner) {
             adapter.updateAdapter(it)

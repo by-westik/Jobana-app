@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kfd.jobana.R
+import com.kfd.jobana.data.AdvertItem
 import com.kfd.jobana.databinding.FragmentMainBinding
 import com.kfd.jobana.models.Resource
 import com.kfd.jobana.viewmodels.AdvertViewModel
@@ -26,6 +27,7 @@ class MainFragment : Fragment() {
 
     private val advertViewModel: AdvertViewModel by viewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,14 +42,17 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun click() {
-        parentFragmentManager.beginTransaction().replace(R.id.fragmentMainContainerView, AdvertFragment()).commit()
+    private fun click(advertId: String) {
+        val advertFragment = AdvertFragment()
+        val id = Bundle()
+        id.putString("ID", advertId)
+        advertFragment.arguments = id
+        parentFragmentManager.beginTransaction().replace(R.id.fragmentMainContainerView, advertFragment).commit()
     }
 
     private fun setupRv() {
-        adapter = AdvertsAdapter(
-            requireActivity(), listOf(), requireContext()
-        ) { click() }
+        val advertClick = {advert: AdvertItem -> click(advert.id)}
+        adapter = AdvertsAdapter(requireActivity(), listOf(), requireContext(), advertClick)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

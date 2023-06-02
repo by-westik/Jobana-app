@@ -25,6 +25,9 @@ class AdvertViewModel @Inject constructor(
     val response: LiveData<List<AdvertItem>>
         get() = _response
 
+    private val _advertResponse: MutableLiveData<AdvertItem> = MutableLiveData()
+    val advertResponse: LiveData<AdvertItem>
+        get() = _advertResponse
     fun getUserAdverts() = viewModelScope.launch{
         advertRepository.getUserAdverts({
             _response.postValue(it)
@@ -32,6 +35,14 @@ class AdvertViewModel @Inject constructor(
             Log.d(TAG, "User $error")
         })
 
+    }
+
+    fun getAdvertById(id: String) = viewModelScope.launch {
+        advertRepository.getAdvertById(id, {
+            _advertResponse.postValue(it)
+        },{ error ->
+            Log.d(TAG, "ADVERT BY ID $error")
+        })
     }
 
     fun getAllAdverts() = viewModelScope.launch {

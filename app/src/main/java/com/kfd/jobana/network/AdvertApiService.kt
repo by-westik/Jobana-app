@@ -32,6 +32,11 @@ interface AdvertApiService {
         @Body advertRequest: AdvertRequest
     ) : AdvertResponse
 
+    @GET("adverts/{id}")
+    suspend fun getAdvertById(
+        @Path("id") id: String
+    ) : AdvertResponse
+
     @PATCH("adverts/{id}")
     suspend fun closeOpenAdvert(
         @Path("id") id: String,
